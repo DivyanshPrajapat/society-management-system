@@ -1,0 +1,19 @@
+POST http://localhost:5000/api/v1/auth/register
+Content-Type: application/json
+
+{
+    "name": "John Doe",
+    "email": "testuser@example.com",
+    "password": "Password123!",
+    "phone": "1234567890",
+    "role": "admin"
+} 
+
+### Login Request
+POST http://localhost:5000/api/v1/auth/login
+Content-Type: application/json
+
+{
+    "email": "testuser@example.com",
+    "password": "Password123!"
+}
