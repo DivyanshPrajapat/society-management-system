@@ -17,3 +17,26 @@ Content-Type: application/json
     "email": "testuser@example.com",
     "password": "Password123!"
 }
+###
+POST http://localhost:5000/api/v1/societies
+Content-Type: application/json
+
+{
+  "name": "Green Valley",
+  "address": "Indore",
+  "city": "Indore",
+  "state": "MP",
+  "pincode": "452001"
+}
+### Add Society with Authorization
+POST http://localhost:5000/api/v1/societies
+Content-Type: application/json
+Authorization: Bearer YOUR_COPIED_TOKEN_HERE
+
+{
+  "name": "Green Valley",
+  "address": "Indore",
+  "city": "Indore",
+  "state": "MP",
+  "pincode": "452001"
+}

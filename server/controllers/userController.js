@@ -52,18 +52,24 @@ const getDirectoryUsers = asyncWrapper(async (req, res) => {
 // GET /api/v1/users
 // Restricted to Admin and Super Admin
 const getAllUsers = asyncWrapper(async (req, res) => {
-  const { isApproved, role } = req.query;
+  const { isApproved, role, name } = req.query;
 
   const query = {};
+
   if (req.user.role === 'admin' && req.user.societyId) {
-    // Admins only see users of their own society
     query.societyId = req.user.societyId;
   }
+
   if (isApproved !== undefined) {
     query.isApproved = isApproved === 'true';
   }
+
   if (role) {
     query.role = role;
+  }
+
+  if (name) {
+    query.name = { $regex: name, $options: 'i' };
   }
 
   const users = await User.find(query)
@@ -76,7 +82,6 @@ const getAllUsers = asyncWrapper(async (req, res) => {
     data: users,
   });
 });
-
 // Update User (Self update or Admin override)
 // PUT /api/v1/users/:id
 const updateUser = asyncWrapper(async (req, res) => {
